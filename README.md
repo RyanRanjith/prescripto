@@ -3,4 +3,5 @@
 November 14 - 32:31
 
 November 15 - 1:02:46 Home.jsx
-o 
+
+November 17 - 1:45:21 Footer.jsx  2:01:06 - Doctors.jsx
