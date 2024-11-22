@@ -11,3 +11,5 @@ November 18 - 2:31:01 Appointment.jsx
 November 19 - 3:02:01 RelatedDoctors.jsx
 
 November 20 - 3:31:26 Login.jsx 
+
+November 21 - 4:02:07 MyProfile.jsx
