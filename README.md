@@ -14,4 +14,10 @@ November 20 - 3:31:26 Login.jsx
 
 November 21 - 4:02:07 MyProfile.jsx
 
-November 22 - 4:31:11 Doctors.jsx
+November 22 - 4:31:11 Doctors.jsx Rough - 4:34
+
+November 23 - 5:02:18 doctorModel.jsx
+
+to run backend - npm run server
+
+MOngodb password : greatstack123 or greatstack12345678
