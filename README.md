@@ -20,4 +20,6 @@ November 23 - 5:02:18 doctorModel.jsx
 
 to run backend - npm run server
 
-MOngodb password : greatstack123 or greatstack12345678
+MOngodb password : greatstack123 or greatstack12345678 
+
+November 25 - 5:46:55
