@@ -54,10 +54,17 @@ const loginUser = async (req,res) => {
         const user = await userModel.findOne({email})
 
         if (!user) {
-            res.json({success:false,message:'User Does Not Exist'})
+           return res.json({success:false,message:'User Does Not Exist'})
         }
 
-        const isMatch = 
+        const isMatch = await bcrypt.compare(password,user.password)
+
+        if (isMatch) {
+            const token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
+            res.json({success:true, token})
+        } else {
+            res.json({success:false, message:"Invalid Credentials"})
+        }
 
     } catch (error) {
         console.log(error)
@@ -65,4 +72,4 @@ const loginUser = async (req,res) => {
     }
 }
 
-export {registerUser}
+export {registerUser, loginUser}

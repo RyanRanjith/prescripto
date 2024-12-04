@@ -29,3 +29,5 @@ NOvember 27 - 6:47:37
 December 1 - 8:17:33 
 
 December 2 - 8:48:35
+
+December 3 - 9:18:47
