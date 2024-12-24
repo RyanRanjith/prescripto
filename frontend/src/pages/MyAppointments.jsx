@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import {AppContext} from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const MyAppointments = () => {
 
@@ -9,6 +10,8 @@ const {backendUrl, token, getDoctorsData} = useContext(AppContext)
 
 const [appointments, setAppointments] = useState([])
 const months = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+const navigate = useNavigate()
 
 const slotDateFormat = (slotDate) => {
      const dateArray = slotDate.split('_')
@@ -51,18 +54,46 @@ const cancelAppointment = async (appointmentId) => {
      }
 }
 
+const initPay = (order) => {
+  const options = {
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+    amount:order.amount,
+    currency:order.currency,
+    name:"Appointment Payment",
+    description:"Appointment Payment",
+    order_id:order.id,
+    receipt:order.receipt,
+    handler: async (response) => {
+       console.log(response );
+       try {
+        const {data} = await axios.post(backendUrl+'/api/user/verifyRazorpay',response,{headers:{token}})
+        if (data.success) {
+          getUserAppointments()
+
+        }
+       } catch (error) {
+        
+       }
+    }
+     
+  }
+
+  const rzp = new window.Razorpay(options)
+  rzp.open()
+}
+
 const appointmentRazorpay = async (appointmentId) => {
    try {
     const {data} = await axios.post(backendUrl + '/api/user/payment-razorpay', {appointmentId}, {headers:{token }})
     if (data.success) {
-      console.log(data.order);
       
+      initPay(data.order)
     }
    } catch (error) {
     
    }
 }
-
+ 
 useEffect(()=>{
    if (token) {
     getUserAppointments()
